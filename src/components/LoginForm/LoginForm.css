@@ -1,0 +1,35 @@
+.form-container {
+  width: 80%;
+}
+
+.custom-button {
+  background-color: #6c757d;
+  border: 1px solid #777d81;
+}
+
+.custom-button:hover {
+  background-color: #383838 !important;
+  border: 1px solid #777d81;
+}
+
+a{
+  text-decoration: none;
+  color: #000;
+}
+
+a:hover{
+color: #6c757d;
+}
+@media screen and (max-width: 768px) {
+  .login-mobile {
+    width: 90%;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px;
+    margin: 20px 0px;
+  }
+}

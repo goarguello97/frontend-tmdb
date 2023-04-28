@@ -1,0 +1,118 @@
+.card {
+  min-width: 200px;
+  width: 200px;
+  height: 420px;
+  background-color: #212529;
+  margin: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.cover {
+  width: 100%;
+  height: 290px;
+  background-position: center;
+  border: 0.5px solid #383838;
+  cursor: pointer;
+}
+
+.content {
+  width: 100%;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content-header {
+  display: flex;
+  color: white;
+  font-size: 18px;
+}
+
+.content-header div {
+  width: 50%;
+}
+
+.content-header div:first-child {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.content-header svg {
+  color: yellow;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.content-header div:nth-child(2) {
+  margin: 10px;
+  margin-left: 0px;
+  width: 20px;
+  border-radius: 5px;
+}
+
+.content-header div:nth-child(2) svg {
+  color: white;
+  cursor: pointer;
+  margin: 0px;
+}
+
+.content-header div:nth-child(2):hover {
+  background-color: rgba(113, 116, 120, 0.5);
+}
+
+.favorite {
+  color: rgba(255, 0, 0, 0.5) !important;
+}
+
+.title {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.title h4 {
+  margin-bottom: 0px;
+}
+
+.title h4 a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.title h4 a:hover {
+  text-decoration: underline;
+}
+
+.title svg {
+  font-size: 40px;
+}
+
+.title svg:hover {
+  color: rgba(113, 116, 120, 0.5);
+  cursor: pointer;
+}
+
+/* Media querys */
+@media screen and (max-width: 768px) {
+  /* Card */
+
+  .card {
+    width: 80vw;
+    min-height: calc(85vh - 76px);
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cover{
+    min-height: calc(70vh - 76px);
+    background-size: cover;
+  }
+}
