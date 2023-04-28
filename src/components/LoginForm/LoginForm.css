@@ -1,5 +1,6 @@
 .form-container {
   width: 80%;
+  max-width: 580px;
 }
 
 .custom-button {

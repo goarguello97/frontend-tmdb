@@ -6,15 +6,15 @@ const RegisterForm = () => {
     <Form className="form-container">
       <h1>Registro</h1>
       <hr />
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="name">
         <Form.Label>Nombre</Form.Label>
         <Form.Control type="text" placeholder="Nombre" name="name" />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="lastname">
         <Form.Label>Apellido</Form.Label>
         <Form.Control type="text" placeholder="Apellido" name="lastname" />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="email">
         <Form.Label>Correo electrónico</Form.Label>
         <Form.Control
           type="email"
@@ -23,7 +23,7 @@ const RegisterForm = () => {
         />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Group className="mb-3" controlId="password">
         <Form.Label>Contraseña</Form.Label>
         <Form.Control
           type="password"
