@@ -1,13 +1,29 @@
 import "./Card.css";
 import { AiFillStar, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsPlayFill } from "react-icons/bs";
-import cover from "../../assets/img/johnwick.jpg";
 import { Link } from "react-router-dom";
 
-const Card = () => {
+const Card = ({
+  image,
+  title,
+  id,
+  typeFilm,
+}: {
+  image: string;
+  title: string;
+  id: number;
+  typeFilm: string;
+}) => {
   return (
     <div className="card">
-      <div className="cover" style={{ backgroundImage: `url(${cover})` }}></div>
+      <Link to={`/movie-detail/${typeFilm}/${id}`}>
+        <div
+          className="cover"
+          style={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/w342${image})`,
+          }}
+        ></div>
+      </Link>
       <div className="content">
         <div className="content-header">
           <div>
@@ -22,8 +38,12 @@ const Card = () => {
           </div> */}
         </div>
         <div className="title">
-          <h4><Link to="/movie">John Wick 4</Link></h4>
-          <BsPlayFill />
+          <h4>
+            <Link to={`/movie-detail/${typeFilm}/${id}`}>{title}</Link>
+          </h4>
+          <Link to={`/movie-detail/${typeFilm}/${id}`}>
+            <BsPlayFill />
+          </Link>
         </div>
       </div>
     </div>

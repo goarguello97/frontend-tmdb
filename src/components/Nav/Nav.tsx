@@ -37,9 +37,6 @@ const NavMenu = () => {
               <Link to="/drama" onClick={onMenu}>
                 <li>Drama</li>
               </Link>
-              <Link to="/action" onClick={onMenu}>
-                <li>Acción</li>
-              </Link>
               <Link to="/comedy" onClick={onMenu}>
                 <li>Comedia</li>
               </Link>
@@ -78,9 +75,6 @@ const NavMenu = () => {
               </Link>
               <Link to="/drama" onClick={onMenu}>
                 <li>Drama</li>
-              </Link>
-              <Link to="/action" onClick={onMenu}>
-                <li>Acción</li>
               </Link>
               <Link to="/comedy" onClick={onMenu}>
                 <li>Comedia</li>
