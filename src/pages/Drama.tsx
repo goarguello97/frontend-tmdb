@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { getDrama } from "../features/movies/moviesSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/useTypedSelector";
 import { Movie } from "../interfaces/movies.interface";
+import { TabTitle } from "../utils";
 
 const Drama = () => {
   const { width } = useMediaQuery();
@@ -14,7 +15,11 @@ const Drama = () => {
 
   useEffect(() => {
     dispatch(getDrama());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  TabTitle("Drama - The Best TMDB");
+
   return (
     <div className="container-fluid home">
       {width > 768 ? (
@@ -26,6 +31,8 @@ const Drama = () => {
               title={movie.title}
               id={movie.id}
               typeFilm={"movie"}
+              date={movie.release_date}
+              calification={movie.vote_average}
             />
           ))}
         </div>
@@ -38,6 +45,8 @@ const Drama = () => {
                 title={movie.title}
                 id={movie.id}
                 typeFilm={"movie"}
+                date={movie.release_date}
+                calification={movie.vote_average}
               />
             </Carousel.Item>
           ))}

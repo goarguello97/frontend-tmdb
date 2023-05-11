@@ -11,6 +11,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+    {/* Habilitación del store para los estados globales mediante Redux */}
     <Provider store={store}>
       <App />
     </Provider>

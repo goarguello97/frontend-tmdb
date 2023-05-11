@@ -16,8 +16,9 @@ const useForm = (initialValues: any, submit: any, validations: any) => {
       setSubmitting(false);
       setTimeout(() => {
         setErrors({});
-      }, 3000);
+      }, 5000);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errors]);
 
   const handleChange = (e: any) => {

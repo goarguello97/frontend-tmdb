@@ -14,6 +14,8 @@ body {
   background-image: url("./assets/img/fondo-login.jpg");
   background-position: center;
   background-size: contain;
+  width: 100%;
+  height: 100vh;
 }
 
 code {
@@ -33,7 +35,7 @@ code {
   align-items: center;
 }
 
-.home h1{
+.home h1 {
   margin-top: 20px;
 }
 
@@ -73,7 +75,7 @@ code {
 
 .container-login {
   display: flex;
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh);
   height: auto;
 }
 
@@ -107,7 +109,7 @@ code {
 
 /* Página pelicula */
 
-.single-movie{
+.single-movie {
   background-color: rgba(255, 255, 255, 0.9);
   height: auto;
   min-height: calc(100vh - 56px);
@@ -117,8 +119,8 @@ code {
   align-items: center;
 }
 
-.single-movie hr{
-width: 100%;
+.single-movie hr {
+  width: 100%;
 }
 
 .info-movie {
@@ -132,11 +134,11 @@ width: 100%;
   margin-bottom: 20px;
 }
 
-.info-movie h1{
+.info-movie h1 {
   width: 100%;
   text-align: center;
 }
-.info-movie span{
+.info-movie span {
   width: 100%;
   text-align: center;
 }
@@ -161,7 +163,7 @@ width: 100%;
   width: 70%;
 }
 
-.movie-description{
+.movie-description {
   width: 100%;
   text-align: justify;
 }
@@ -246,6 +248,13 @@ width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.user-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .user div h1 {
@@ -371,6 +380,19 @@ width: 100%;
   border-radius: 10px;
 }
 
+.movie-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px !important;
+  overflow-y: hidden !important;
+  border: none !important;
+  background-color: transparent !important;
+  width: 100% !important;
+  padding: 0px !important;
+  margin-top: 5px !important;
+}
+
 .movie-item {
   width: 100%;
   display: flex;
@@ -383,6 +405,19 @@ width: 100%;
   background-color: rgba(143, 153, 161, 1);
   cursor: pointer;
   color: #fff;
+}
+
+.delete-button {
+  color: #fff;
+  background-color: #6c757d;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #777d81;
+  text-align: center;
+}
+
+.delete-button:hover {
+  background-color: #383838 !important;
 }
 
 /* Editar perfil*/
@@ -458,6 +493,7 @@ width: 100%;
 
   .home {
     align-items: center;
+    justify-content: center;
     overflow: hidden;
   }
 

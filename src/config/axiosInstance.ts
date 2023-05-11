@@ -1,7 +1,9 @@
 import axios from "axios";
 
+// Función para utilizar axios de manera global
+
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: process.env.REACT_APP_URL_BASE,
 });
 
 export default axiosInstance;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { TabTitle } from "../utils";
 
 const Error404 = () => {
   const [flag, setFlag] = useState(false);
@@ -13,7 +14,10 @@ const Error404 = () => {
         setFlag(true);
       }
     }, 3000);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flag]);
+
+TabTitle("Error 404")
 
   return (
     <div className="container-fluid error-404">
