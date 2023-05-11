@@ -8,7 +8,7 @@ export interface Movies {
   horror: Movie[];
   comedy: Movie[];
   drama: Movie[];
-  search: Search;
+  search: Search | null;
 }
 
 export interface OneMovie {
@@ -16,7 +16,7 @@ export interface OneMovie {
   loadingSearch: boolean;
   searchOk: boolean;
   error: any;
-  movie: Movie | TvSeries;
+  movie: Movie | TvSeries | null;
 }
 
 export interface Movie {
@@ -55,6 +55,7 @@ export interface Movie {
 export interface TvSeries {
   backdrop_path: string;
   first_air_date: string;
+  genres: Genre[];
   genre_ids: number[];
   release_date: string;
   id: number;
@@ -74,7 +75,10 @@ export interface TvSeries {
   images: Images;
 }
 
-interface Search {}
+interface Search {
+  movies: { results: [] };
+  tvSeries: { results: [] };
+}
 
 interface BelongsToCollection {
   id: number;

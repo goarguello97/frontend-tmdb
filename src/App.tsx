@@ -11,24 +11,100 @@ import Error404 from "./pages/Error404";
 import Horror from "./pages/Horror";
 import Drama from "./pages/Drama";
 import Comedy from "./pages/Comedy";
+import PrivateRoute from "./routes/PrivateRoute";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "./hooks/useTypedSelector";
+import { persistLogin } from "./features/user/authSlice";
 
 function App() {
+  const dispatch = useAppDispatch();
+  const { userLogged } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!userLogged) {
+      dispatch(persistLogin());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userLogged]);
+
   return (
     <Router>
-      <NavMenu />
+      {userLogged ? <NavMenu /> : null}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/movie" element={<SingleMovie />} />
-        <Route path="/horror" element={<Horror />} />
-        <Route path="/drama" element={<Drama />} />
-        <Route path="/comedy" element={<Comedy />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/movie-detail/:typeFilm/:id/*" element={<SingleMovie />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/profile-edit" element={<ProfileEdit />} />
-        <Route path="/*" element={<Error404 />} />
+        <Route
+          path="/horror"
+          element={
+            <PrivateRoute>
+              <Horror />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/drama"
+          element={
+            <PrivateRoute>
+              <Drama />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/comedy"
+          element={
+            <PrivateRoute>
+              <Comedy />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <PrivateRoute>
+              <Users />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/movie-detail/:typeFilm/:id/*"
+          element={
+            <PrivateRoute>
+              <SingleMovie />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile-edit"
+          element={
+            <PrivateRoute>
+              <ProfileEdit />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/*"
+          element={
+            <PrivateRoute>
+              <Error404 />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );

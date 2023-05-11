@@ -1,7 +1,9 @@
 export interface Auth {
   error: any;
+  errorPersist: any;
   operationOK: boolean;
-  userLogged: userLogged;
+  userRegister: string | null;
+  userLogged: userLogged | null;
   loading: boolean;
   isUserLogged: boolean;
 }
@@ -19,9 +21,11 @@ export interface Register {
   password2: string;
 }
 
-interface userLogged {
+export interface userLogged {
   payload: Payload;
-  token: string;
+  token: string | null;
+  iat: number;
+  exp: number;
 }
 
 interface Payload {

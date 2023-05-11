@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../config/axiosInstance";
 import { OneMovie } from "../../interfaces/movies.interface";
 
@@ -20,7 +20,7 @@ const initialState = {
   loadingSearch: false,
   searchOk: false,
   error: null,
-  movie: {},
+  movie: null,
 } as OneMovie;
 
 export const movieSlice = createSlice({
@@ -36,6 +36,7 @@ export const movieSlice = createSlice({
       state.movie = action.payload;
     });
     builder.addCase(getOne.rejected, (state, action) => {
+      state.loadingMovies = false;
       state.error = true;
     });
   },

@@ -4,4 +4,5 @@ export interface ErrorInterface {
   lastname: string;
   password: string;
   password2: string;
+  search:string
 }

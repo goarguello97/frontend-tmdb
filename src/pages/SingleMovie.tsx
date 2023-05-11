@@ -1,23 +1,66 @@
 import "../index.css";
 import ReactPlayer from "react-player/youtube";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import cover from "../assets/img/johnwick.jpg";
 import { useParams } from "react-router-dom";
 import { getOne } from "../features/movies/moviesSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/useTypedSelector";
-import { isNonNullChain } from "typescript";
+import { addFav, myUser, remFav } from "../features/user/userSlice";
+import { TabTitle } from "../utils";
 
 const SingleMovie = () => {
   const dispatch = useAppDispatch();
   const { id, typeFilm } = useParams();
-  const { movie } = useAppSelector((state) => state.movie);
+  const { movie, loadingMovies } = useAppSelector((state) => state.movie);
+  const { userLogged } = useAppSelector((state) => state.auth);
+  const { user, loading } = useAppSelector((state) => state.user);
+  const [flag, setFlag] = useState(false);
+  const [movieData, setMovieData] = useState({
+    movieId: 0,
+    movieTitle: "",
+    movieDate: "",
+    movieGenre: [],
+    email: "",
+    typeFilm,
+  });
 
   useEffect(() => {
-    dispatch(getOne(`${typeFilm}/${id}`));
-  }, []);
-  console.log(movie);
-  return (
+    if (loading && userLogged) {
+      dispatch(myUser(userLogged.payload.id));
+    }
+    if (!flag && userLogged) {
+      dispatch(getOne(`${typeFilm}/${id}`));
+      setFlag(true);
+    }
+    if (flag && movie) {
+      if (typeFilm === "movie") {
+        setMovieData({
+          movieId: Number(id),
+          movieTitle: movie!.title,
+          movieDate: movie!.release_date,
+          movieGenre: [],
+          email: userLogged!.payload.email,
+          typeFilm,
+        });
+      } else {
+        setMovieData({
+          movieId: Number(id),
+          movieTitle: movie!.name,
+          movieDate: movie!.first_air_date,
+          movieGenre: [],
+          email: userLogged!.payload.email,
+          typeFilm,
+        });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, typeFilm, flag, movie, loadingMovies, user, loading]);
+
+  TabTitle(
+    `${typeFilm === "movie" ? movie!.title : movie!.name} - The Best TMDB`
+  );
+
+  return movie ? (
     <div className="container-fluid single-movie">
       <div className="info-movie">
         <h1>{typeFilm === "movie" ? movie.title : movie.name}</h1>
@@ -61,11 +104,30 @@ const SingleMovie = () => {
 
       <hr />
       <div className="options-movie">
-        <AiOutlineHeart />
-        <AiFillHeart />
+        {userLogged ? (
+          user!.favorites.find((e) => e.movieId === movie.id) ? (
+            <AiFillHeart
+              onClick={() => {
+                dispatch(remFav(movieData)).then(() =>
+                  dispatch(myUser(userLogged!.payload.id))
+                );
+                setFlag(false);
+              }}
+            />
+          ) : (
+            <AiOutlineHeart
+              onClick={() => {
+                dispatch(addFav(movieData)).then(() =>
+                  dispatch(myUser(userLogged!.payload.id))
+                );
+                setFlag(false);
+              }}
+            />
+          )
+        ) : null}
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default SingleMovie;
