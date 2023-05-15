@@ -66,11 +66,8 @@ const Profile = () => {
                 },
                 i
               ) => (
-                <div className="movie-container">
-                  <Link
-                    key={i}
-                    to={`/movie-detail/${movie.typeFilm}/${movie.movieId}`}
-                  >
+                <div className="movie-container" key={i}>
+                  <Link to={`/movie-detail/${movie.typeFilm}/${movie.movieId}`}>
                     <p className="movie-item">{movie.movieTitle}</p>
                   </Link>
                   <button

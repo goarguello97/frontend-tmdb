@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axiosInstance from "../../config/axiosInstance";
 import { Auth, Login, Register } from "../../interfaces/auth.interface";
+import { AxiosHeaders } from "axios";
 
 export const register = createAsyncThunk(
   "REGISTER",
@@ -24,9 +25,7 @@ export const login = createAsyncThunk(
   "LOGIN",
   async (data: Login, thunkApi) => {
     try {
-      const userLogin = await axiosInstance.post(`/users/login`, data, {
-        withCredentials: true,
-      });
+      const userLogin = await axiosInstance.post(`/users/login`, data);
       return {
         status: userLogin.status,
         user: userLogin.data,
@@ -42,9 +41,7 @@ export const login = createAsyncThunk(
 
 export const logOut = createAsyncThunk("LOG_OUT", async (_, thunkApi) => {
   try {
-    const userLogout = await axiosInstance.post("/users/logout", _, {
-      withCredentials: true,
-    });
+    const userLogout = await axiosInstance.post("/users/logout", _);
     return userLogout.data;
   } catch (error: any) {
     const { message } = error;
@@ -60,9 +57,7 @@ export const persistLogin = createAsyncThunk("PERSIST", async (_, thunkApi) => {
         iat: number;
         exp: number;
       };
-    } = await axiosInstance.get("/users/secret", {
-      withCredentials: true,
-    });
+    } = await axiosInstance.get("/users/secret");
     return {
       payload: persistUser.data.user,
       iat: persistUser.data.iat,
