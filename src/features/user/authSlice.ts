@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../config/axiosInstance";
 import { Auth, Login, Register } from "../../interfaces/auth.interface";
 
@@ -24,9 +24,8 @@ export const login = createAsyncThunk(
   "LOGIN",
   async (data: Login, thunkApi) => {
     try {
-      const userLogin = await axiosInstance.post(`/users/login`, data, {
-        withCredentials: true,
-      });
+      const userLogin = await axiosInstance.post(`/users/login`, data);
+      localStorage.setItem("token", userLogin.data.token);
       return {
         status: userLogin.status,
         user: userLogin.data,
@@ -42,10 +41,10 @@ export const login = createAsyncThunk(
 
 export const logOut = createAsyncThunk("LOG_OUT", async (_, thunkApi) => {
   try {
-    const userLogout = await axiosInstance.post("/users/logout", _, {
-      withCredentials: true,
-    });
-    return userLogout.data;
+    if (localStorage.getItem("token")) {
+      localStorage.removeItem("token");
+    }
+    return { message: "Sesión finalizada." };
   } catch (error: any) {
     const { message } = error;
     return thunkApi.rejectWithValue(message);
@@ -53,6 +52,12 @@ export const logOut = createAsyncThunk("LOG_OUT", async (_, thunkApi) => {
 });
 
 export const persistLogin = createAsyncThunk("PERSIST", async (_, thunkApi) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    axiosInstance.defaults.headers.common["authorization"] = token;
+  } else {
+    delete axiosInstance.defaults.headers.common["authorization"];
+  }
   try {
     const persistUser: {
       data: {
@@ -60,14 +65,12 @@ export const persistLogin = createAsyncThunk("PERSIST", async (_, thunkApi) => {
         iat: number;
         exp: number;
       };
-    } = await axiosInstance.get("/users/secret", {
-      withCredentials: true,
-    });
+    } = await axiosInstance.get(`/users/secret/${token}`);
     return {
       payload: persistUser.data.user,
       iat: persistUser.data.iat,
       exp: persistUser.data.exp,
-      token: null,
+      token,
     };
   } catch (error: any) {
     return thunkApi.rejectWithValue("No hay una sesión existente.");
