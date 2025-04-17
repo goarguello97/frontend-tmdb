@@ -1,5 +1,5 @@
 
-# Cliente de Aplicación Web (Frontend TMDB)
+# Aplicación web de Catálogos de películas
 
 Este proyecto es una aplicación frontend desarrollada con **React**, **Redux**, **TypeScript** y otras tecnologías modernas. Se conecta con una API backend para ofrecer una experiencia de usuario dinámica basada en información de películas provista por la API de TMDB (The Movie Database).
 
